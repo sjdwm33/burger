@@ -1,7 +1,13 @@
 var mysql = require("mysql");
 var appConfig = require("../config");
 
-var connection = mysql.createConnection(appConfig.config);
+var connection; 
+
+if (process.env.JAWSDB_URL){
+	connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+	connection = mysql.createConnection(appConfig.config);
+};
 
 connection.connect(function(err) {
   if (err) {
